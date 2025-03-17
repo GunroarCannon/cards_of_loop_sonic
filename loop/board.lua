@@ -102,6 +102,11 @@ end
 
 function Board:setup()
     gooi.components = {}
+<<<<<<< HEAD
+    gooi.closeDialog()
+    
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     self:activate_gooi()
     self.cover_alpha = 1
     self:tweenCoverAlpha(1, 0)
@@ -128,7 +133,11 @@ function Board:setup()
     
     --self.cards_3.layout:init(self.cards_3)
     ttx=0
+<<<<<<< HEAD
+    gooi.newb = gooi.newb or gooi.newLabel
+=======
     gooi.newb = gooi.newLabel
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     gooi.newLabel = function(...)
         
         local g = gooi.newButton(...)
@@ -196,7 +205,11 @@ function Board:setup()
     gooi.addComponent(self.cards_3)
     
     
+<<<<<<< HEAD
+    self.startTime = 4
+=======
     self.startTime = 3
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     self.time = self.startTime
     self.doTime = 1
     if not toybox.getData('loop').intro then
@@ -207,6 +220,11 @@ function Board:setup()
             text = intro,
             big = true
         })
+<<<<<<< HEAD
+    else
+        claimPop()
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     end
 end
 
@@ -224,7 +242,11 @@ function Board:keypressed(key)
         love.window.setFullscreen(not love.window.getFullscreen())
     end
     if key == "escape" then
+<<<<<<< HEAD
+        game:set_room(Home)
+=======
         game:set_room("home")
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     end
     
     local n = tonumber(key)
@@ -254,6 +276,12 @@ function Board.selectCard(card)
         media.sfx[getValue(deck.sound)]:play()
     end
     
+<<<<<<< HEAD
+    cc.color = getColor("green")
+    
+    self:after(.1, function()
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     
     local s = deck.sounds and deck.sounds[data._name]
     
@@ -366,7 +394,11 @@ function Board.selectCard(card)
             end)
         else
             if cc.correct then c.color = "red" end
+<<<<<<< HEAD
+            game.room:tween(t*1.5, c, {x=self.gameDone and c.x or -c.w, y=cc.correct and -cc.h or H()+c.h, angle= cc.correct and 0 or -700}, self.gameDone and "out-quad" or "out-circ",function()
+=======
             game.room:tween(t, c, {x=self.gameDone and c.x or -c.w, y=cc.correct and -cc.h or H()+c.h, angle= cc.correct and 0 or -700}, self.gameDone and "out-quad" or "out-circ",function()
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
                 c:destroy()
             end)
             cc.correct = false
@@ -395,7 +427,13 @@ function Board.selectCard(card)
     game.timer:after(gameDone and .15 or 0, done)
     
     game.room.camera:shake(self.gameDone and 50 or 25,self.gameDone and .5 or .2,40)
+<<<<<<< HEAD
+    end)
     
+    self.noTouch = 1
+=======
+    
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 end
 
 local texts = {
@@ -422,6 +460,11 @@ function Board:gamegameover()
         toybox.saveData('loop')
     end
     
+<<<<<<< HEAD
+    rewardPoints(self.score)
+    
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     gooi.currentGroup = "over"
     gooi.dialog({
         text = string.format([[
@@ -434,11 +477,20 @@ function Board:gamegameover()
 
 Score: %s
 
+<<<<<<< HEAD
+Highscore: %s
+%s]],
+        self.timeout and "You took too long..." or "You picked the wrong action.",
+        getValue(texts.lost),
+        self.score,
+        toybox.getData("loop").highest, doneChallenge and "YOU COMPLETED A CHALLENGE!!" or ""),
+=======
 Highscore: %s]],
         self.timeout and "You took too long..." or "You picked the wrong action.",
         getValue(texts.lost),
         self.score,
         toybox.getData("loop").highest),
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         okText = getValue(texts.again)
         ,cancelText = getValue(texts.cancel),
         big=true,
@@ -449,7 +501,11 @@ Highscore: %s]],
             game:set_room(r.name)
         end,
         cancel = function()
+<<<<<<< HEAD
+            game:set_room(Home)--love.event.quit()
+=======
             game:set_room("home")--love.event.quit()
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         end
     })
     
@@ -469,6 +525,10 @@ end
 
 function Board:gameover(time)
     self.nextDeck = gameoverDeck
+<<<<<<< HEAD
+    self.failing = true
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 
     self.camera:fade(.9,colors.black,
     function()
@@ -523,7 +583,14 @@ function Board:repeatLoop()
     self.nextDeck = loopDeck
     if not game.data.loopText then
         gooi.alert({
+<<<<<<< HEAD
+            big = true,
+            text = [[When you loop pick the same
+            actions as before;
+            do it before time runs out!]]
+=======
             text = "When you loop pick the same actions as before before time runs out!"
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         })
         game.data.loopText = true
         game:saveData()
@@ -546,7 +613,11 @@ function Board:repeatt()
 end
 
 function Board:extraDetail(vc)
+<<<<<<< HEAD
+    self:flinch(1.5)
+=======
     self:flinch(1)
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     if not toybox.getData('loop').extra then
         gooi.closeDialog()
         toybox.getData("loop").extra = true
@@ -608,7 +679,13 @@ function Board:getDeck(n)
 
     if self.loops[n][2] then
         self.loops[n][2] = nil
+<<<<<<< HEAD
+        if not self.failing then
+            self:extraDetail()
+        end
+=======
         self:extraDetail()
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         self.drawTime = nil
         self.time = self.startTime
         
@@ -617,7 +694,11 @@ function Board:getDeck(n)
     if not self.choices[tostring(self.loops[n])] and not self.nextDeck then
         self.drawTime = false
         self.extra:setText("New Event")
+<<<<<<< HEAD
+        self.timer:after(2,function()
+=======
         self.timer:after(1,function()
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
             self.extra:setText("")
         end)
     end
@@ -654,6 +735,10 @@ local nnn = getValue({
     for x = 1, self.num do
         local card = self.cards[x]
         local ccard = self.cardsUI[x]
+<<<<<<< HEAD
+        card.color = nil
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         
         card:setData(new[x])
         
@@ -1001,7 +1086,19 @@ function Board:draw()
          gooi:draw(gooi.currentGroup)
      end
     
+<<<<<<< HEAD
+    if self.gameOverPanel or (gooi.panelDialog and gooi.panelDialog.big and gooi.yesButton) then
+        if gooi.panelDialog then
+            gooi.panelDialog.opaque = nil
+        end
+        if gooi.yesButton and gooi.noButton then
+            gooi.yesButton.opaque = nil
+            gooi.noButton.opaque = nil
+        end
+        
+=======
     if self.gameOverPanel then
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         love.graphics.draw(game:getAsset("panel.png"))
     end
     
@@ -1022,7 +1119,11 @@ function Board:draw()
         end
     end
     local text = "Time: "..vv
+<<<<<<< HEAD
+    local ss = 5-vv--2.5--4-((tt/60)+1)
+=======
     local ss = 4-vv--2.5--4-((tt/60)+1)
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     if self.timeout then
         text = "Timeout"
     end

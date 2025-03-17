@@ -2,7 +2,11 @@ _W, _H = 1280, 800
 aspect.setGame(_W,_H)
 
 function rewardPoints(points)
+<<<<<<< HEAD
+    game.data.unrewardedPoints = game.data.unrewardedPoints + (points or 0)
+=======
 
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 end
 
 cards = require "loop.cards"
@@ -28,6 +32,10 @@ do
     
     scfont = love.graphics.newFont(fontName)
     sfont20 = love.graphics.newFont(fontName,H(40))
+<<<<<<< HEAD
+    sfont14 = love.graphics.newFont(fontName,H(35))
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     sfont13 = love.graphics.newFont(fontName,H(30))
     sfont8 = love.graphics.newFont(fontName,H(20))
     
@@ -44,6 +52,93 @@ do
 end
     
 local WalletNetwork = require("loop.wallet") -- Load the WalletNetwork library
+<<<<<<< HEAD
+SOL = .001 -- Conversion rate
+
+function claimPop()
+    local self = toybox.room
+    if game.data.unrewardedPoints > 0 then
+        gooi.dialog({
+            big = true,
+            text = string.format([[
+You have %s pt uncollected tokens! 
+(That's %s SOL!!)
+%s]], game.data.unrewardedPoints, game.data.unrewardedPoints*SOL, game.data.wallet and "Collect them now!" or "Connect your wallet to get started!"
+            ),
+            ok = function()
+                if game.data.wallet then
+                    gooi.closeDialog()
+                    gooi.alert({text="connecting...",okText="..."})
+                    game.timer:after(.1, function()
+                    gooi.closeDialog()
+                    local done, err = walletNetwork:updateScore(game.data.wallet,game.data.unrewardedPoints*SOL)
+                    if done then
+                        game.data.unrewardedPoints = 0
+                        gooi.alert({text="succesful!"})
+                        self:play_sound(getValue("cheering", "levelup_achievement", "levelup"))
+                        walletBalance = getWalletBalance()
+                    else
+                        self:play_sound("buzz")
+                        self.camera:shake(20, .3, 20)
+                        gooi.alert({text="failed!\n"..tostring(er or "A problem occured!"),big=true})
+                    end
+                    game:saveData()
+                    end)
+                else
+                
+                
+        game:set_room(Home)       
+        self = toybox.room
+        if not self.walletStuffAdded then
+            self.walletStuffAdded = true
+            for x, i in ipairs(self.walletStuff) do
+                gooi.addComponent(i)
+                i.alpha = 0
+    
+                self:tween(3.2, i, {alpha=1}, "in-bounce", x==1 and 
+                function()
+                    self.labelShake:shake(20,.3,20)
+                end)
+            end
+        end
+        
+        gooi.dialog({
+            big = true,
+            text = 
+[[Copy and paste your &colors.orange #Solana wallet ~ to the bar above, and click connect again to be able to gain tokens in your wallet.
+  
+&colors.orange THIS IS A &colors.skyblue @SONIC TESTNET ~ &colors.orange project for now.
+If your wallet is not funded with Testnet tokens go and get some from the sonic faucet first!
+]],
+            cancelText = "close",
+            okText = "fund wallet",
+            ok = openSonicUrl
+        })
+        gooi.lblDialog.yOffset = 5
+        
+        
+                    
+                end
+            end
+        })
+    end
+end
+
+function getWalletBalance()
+    local balanceResponse, err = walletNetwork:checkWalletBalance(game.data.wallet)
+    return balanceResponse and balanceResponse.balance or "???", err
+end
+
+walletNetwork = WalletNetwork.new()
+
+-- Testing wallet functions
+if nil then
+    -- Create a new WalletNetwork instance
+    local nm = "8hxms5T6NdCFbtnSqhHG9TRhvoJBnwMi7SQiseZUjCyJ"
+    -- Wallet address to use
+    local walletAddress = "G21aLewqiN4KWLf7ouC14WqM967JFCgNvgYLxTAQRHws"
+    -- Treasury wallet below
+=======
 
 do
     -- Create a new WalletNetwork instance
@@ -51,12 +146,17 @@ do
     local nm = "8hxms5T6NdCFbtnSqhHG9TRhvoJBnwMi7SQiseZUjCyJ"
     -- Wallet address to use
     local walletAddress = "G21aLewqiN4KWLf7ouC14WqM967JFCgNvgYLxTAQRHws"--
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     local walletAddress = "HcJUYGPbpFthEwq5QwNer79LV51VgajiJpivTKpFJbJN"
     
     local walletAddress2 =nm-- "HcJUYGPbpFthEwq5QwNer79LV51VgajiJpivTKpFJbJN"
 
     -- Connect wallet
+<<<<<<< HEAD
+    local walletResponse, err = walletNetwork:connectWallet(walletAddress)
+=======
     local walletResponse, err = walletNetwork:connectWallet(walletAddress2)
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     if walletResponse then
         print("Wallet connected:".. (walletResponse.message or ""))
     else
@@ -89,6 +189,15 @@ end
 
 
 intro =  
+<<<<<<< HEAD
+[[WELCOME!! PLEASE READ BELOW!!!!
+ 
+Pick actions and when you loop back in
+time choose the same actions the same way.
+ 
+Connect your wallet and
+Earn SOL as you play!!
+=======
 [[Cards of Loop
 ---
 Pick actions for scenarios.
@@ -96,6 +205,7 @@ Loop back in time.
 Complete the old actions the same
 way.
 Or be erased by space and time.  
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 ]]
 
 extra = 
@@ -126,6 +236,10 @@ function Home:setup(k)
     gooi.newLabel = gooi.newb or gooi.newLabel
     gooi.components = {}
     self:activate_gooi()
+<<<<<<< HEAD
+    gooi.closeDialog()
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     
     self.imgAlpha = 0
     self:tween(2, self, {imgAlpha=1}, "in-bounce")
@@ -134,7 +248,11 @@ function Home:setup(k)
     self.playButton = gooi.newButton({
         x = 305,
         y = 481,
+<<<<<<< HEAD
+        w = 250,
+=======
         w = 223,
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         h = 230,
         group = gr
     })
@@ -173,9 +291,83 @@ function Home:setup(k)
         love.system.openURL("https://faucet.sonic.game")
     end
     
+<<<<<<< HEAD
+    if game.data.wallet and not openedWallet then
+        game.timer:after(2, function()
+            gooi.alert({text="connecting to wallet.\nPlease Make sure network\nconnection is good.", okText="..."})
+            gooi.lblDialog:setFont(font8)
+            gooi.okButton:onRelease(function() end)
+        
+        
+            game.timer:after(1, function()
+                openedWallet = true
+                gooi.closeDialog()
+                walletBalance,err = getWalletBalance()
+                
+                local function showChallenges()
+                    self:after(.2, function() self:showDailyChallenges() end)
+                end
+                
+                if walletBalance == "???" then
+                    self:play_sound("buzz")
+                    gooi.alert({text="failed to get wallet ballance!\n \n"..(err~="" and err or "Please check internet\nconnection..."),ok=showChallenges})
+                    gooi.lblDialog:setFont(font8)
+                    gooi.panelDialog:shake(20,.3,20)
+                else
+                    self:play_sound("levelup")
+                    gooi.alert({text="success!",ok=showChallenges})
+                end
+                
+                
+            
+            end)
+        end)
+    end
+    
+    b:onRelease(function(n)
+        if self.showingDailyChallenges or gooi.showingDialog then
+            return
+        end
+        
+        n:shake(20,.4,20)
+        
+        if self.shakeWallet then
+            self.timer:cancel(self.shakeWallet)
+            self.shakeWallet = nil
+        end
+        
+        if self.walletStuffAdded and self.walletAddress:getText() ~= "" then
+            if game.data.wallet and game.data.wallet == self.walletAddress:getText()  then
+                gooi.alert({text=string.format("Wallet %s \nalready connected!","")})
+                walletBalance = getWalletBalance()
+                return
+            end
+
+            local function nn()
+            gooi.closeDialog()
+            local walletResponse, err = walletNetwork:connectWallet(self.walletAddress:getText()) log(walletResponse)
+            if walletResponse and (walletResponse=="Wallet already connected." or walletResponse.walletAddress) then
+                gooi.alert({text="success!"})
+                self:play_sound("ding")
+                game.data.wallet = self.walletAddress:getText()
+                walletBalance = getWalletBalance()
+                game:saveData()
+            else
+                gooi.alert({text="failed to connect wallet! \n"..tostring(err or "Invalid address \nor bad network connection?")})
+                gooi.lblDialog:setFont(font8)
+                
+            end
+            end
+            gooi.alert({text="Connecting,\nPlease wait..."})
+            self:after(.4, nn)
+            return
+        end
+        
+=======
     b:onRelease(function(n)
         n:shake(20,.4,20)
         
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         if not self.walletStuffAdded then
             self.walletStuffAdded = true
             for x, i in ipairs(self.walletStuff) do
@@ -192,22 +384,45 @@ function Home:setup(k)
         gooi.dialog({
             big = true,
             text = 
+<<<<<<< HEAD
+[[Copy and paste your &colors.orange #Solana wallet ~ to the bar above, and @click connect  again ~ to be able to gain tokens in your wallet.
+=======
 [[Copy and paste your &colors.orange #Solana wallet ~ to the bar above to be able to gain tokens in your wallet.
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
   
 &colors.orange THIS IS A &colors.skyblue @SONIC TESTNET ~ &colors.orange project for now.
 If your wallet is not funded with Testnet tokens go and get some from the sonic faucet first!
 ]],
+<<<<<<< HEAD
+            cancelText = "ok",
+=======
             cancelText = "close",
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
             okText = "fund wallet",
             ok = openSonicUrl
         })
         gooi.lblDialog.yOffset = 5
+<<<<<<< HEAD
+        gooi.lblDialog:setFont(sfont13)
+    end)
+    
+    self.connectWalletButton.bgColor = {1,1,1,1}
+    self.collectWalletX = 0
+    self.playButtonX = 0
+    
+    p:onPress(function(n)
+        if self.showingDailyChallenges or gooi.showingDialog then
+            return
+        end
+        
+=======
     end)
     
     self.collectWalletX = 0
     self.playButtonX = 0
     
     p:onRelease(function(n)
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         n:shake(20,.4,20)
         self:tween(.7, self, {playButtonX=-W()/2},"out-quad")
         self:tweenCoverAlpha(1.4, 1.1)
@@ -248,21 +463,60 @@ If your wallet is not funded with Testnet tokens go and get some from the sonic 
     local ww = sfont:getWidth("paste")
     
     self.walletAddress = gooi.newText({
+<<<<<<< HEAD
+        text = game.data.wallet or "",--Connected: uhw7h2jd8djdnejei8wjejdd8wjeid8d9e9e",
+=======
         text = "",--Connected: uhw7h2jd8djdnejei8wjejdd8wjeid8d9e9e",
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         w = W()*.7-ww,
         x = 10,
         y = 10,--H()-font:getHeight()*2.2,
         h = sfont13:getHeight()+10
     }):setFont(font)
+<<<<<<< HEAD
+    local wa = self.walletAddress
+    
+    wa:setText(game.data.wallet or "")
+    wa:onText(function()
+        self.connectWalletButton:shake(20,.3,20)
+        if not self.shakeWallet then
+        self.shakeWallet = self.timer:every(.9, function()
+            self.connectWalletButton:shake(25,.4,25)
+            local c = self.connectWalletButton
+            self:tween(.1, c, {bgColor=colors.green}, "in-quad", function()
+                self:tween(.3, c, {bgColor={1,1,1,1}}, "out-quad")
+            end)
+        end)
+        end
+    end)
+    
+=======
     
     local wa = self.walletAddress
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     if wa.left then wa:left() end
     wa.alpha = 0
     wa.yOffset = 0
     wa.opaque = true
     -- self:tween(2, self.walletAddress, {alpha=1}, "in-bounce")
     
+<<<<<<< HEAD
+    local pasteFunction = function(n)
+        if not self.shakeWallet then
+        self.shakeWallet = self.timer:every(.9, function()
+            self.connectWalletButton:shake(25,.4,25)
+            local c = self.connectWalletButton
+            self:tween(.1, c, {bgColor=colors.green}, "in-quad", function()
+                self:tween(.3, c, {bgColor={1,1,1,1}}, "out-quad")
+            end)
+        end)
+        end
+        
+        self.connectWalletButton:shake(25,.4,20)
+        n:shake(25,.4,25)
+=======
     local pasteFunction = function()
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         self.walletAddress:setText(string.format("%s%s", self.walletAddress:getText() or "", love.system.getClipboardText() or ""))
     end
     
@@ -290,6 +544,24 @@ If your wallet is not funded with Testnet tokens go and get some from the sonic 
         i.alpha = 0
     end
     
+<<<<<<< HEAD
+    if game.data.wallet then
+        if not self.walletStuffAdded then
+            self.walletStuffAdded = true
+            for x, i in ipairs(self.walletStuff) do
+                gooi.addComponent(i)
+                i.alpha = 0
+    
+                self:tween(3.2, i, {alpha=1}, "in-bounce", x==1 and 
+                function()
+                    self.labelShake:shake(20,.3,20)
+                end)
+            end
+        end
+    end
+    
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     -- self:tween(2, self.pasteButton, {alpha=1}, "in-bounce")
     
     
@@ -310,6 +582,10 @@ If your wallet is not funded with Testnet tokens go and get some from the sonic 
     dc:add(gooi.newButton({text="claim"}):onRelease(function(n)
         
         if true then--n.text == "CLAIM" then
+<<<<<<< HEAD
+            local claimed
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
             for x = 1, 3 do
                 local d = dc.sons[x+1].ref
                 local c = d.challenge
@@ -321,11 +597,23 @@ If your wallet is not funded with Testnet tokens go and get some from the sonic 
                     c.claimed = true
                     rewardPoints(c.reward)
                     game:saveData()
+<<<<<<< HEAD
+                    claimed = true
+                    self:after(.3*x, function() self:play_sound("ding") end)
+                    
+                end
+            end
+            if claimed then
+                self:play_sound("zip")
+                return
+            end
+=======
                     
                     self:after(.8, function() self:closeDailyChallenges() end)
                     return
                 end
             end
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         end
         
         self:closeDailyChallenges()
@@ -347,11 +635,31 @@ If your wallet is not funded with Testnet tokens go and get some from the sonic 
     
     self:populateChallenges()
     self.dailyChallenges.alpha = 0
+<<<<<<< HEAD
+    
+    if openedWallet or not game.data.wallet then
+        self:after(1.4, function()
+            self:showDailyChallenges()
+        end)
+    
+    
+    -- Not needed
+    --[[elseif doneChallenge then
+        doneChallenge = false
+        self:showDailyChallenges()]]
+    end
+=======
     -- self:showDailyChallenges()
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
    
    self:closeDailyChallenges()
    
    self.comps = gooi.components
+<<<<<<< HEAD
+   
+   --claimPop()
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 end
 
 function Home:onSwitch()
@@ -395,6 +703,22 @@ function Home:showDailyChallenges()
     end
 end
 
+<<<<<<< HEAD
+function Home:keypressed(key)
+    if key == "escape" then
+      gooi.dialog({
+        text = "Exit the loop?",
+        big=true,
+        group=gooi.currentGroup,
+        ok = function()
+            love.event.quit()
+        end
+      })
+    end
+end
+
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 function Home:closeDailyChallenges()
     self.showingDailyChallenges = falss
     if self.showingDaily then
@@ -436,6 +760,11 @@ function Home:draw()
     local r,g,b,a = set_color(1,1,1,self.imgAlpha)
     lg.draw(game:getAsset("homescreen.png"))
     lg.draw(game:getAsset("menu/playGame.png"), self.playButton.shake_x, self.playButtonY)
+<<<<<<< HEAD
+    
+    set_color(self.connectWallet.bgColor)
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     lg.draw(game:getAsset("menu/connectWallet.png"), self.connectWallet.shake_x, self.connectWalletY)
     
     set_color(1,1,1,(self.imgAlpha)*(1-self.dailyChallenges.alpha))
@@ -453,7 +782,11 @@ function Home:draw()
     local sfont = font8
     local ww = sfont:getWidth(" paste ")
     
+<<<<<<< HEAD
+    local text = not self.walletStuffAdded and "" or string.format("Amount in wallet: %s SOL", walletBalance or "???")
+=======
     local text = not self.walletStuffAdded and "" or "Amount in wallet: ?      ??SOL"
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     local w, h = sfont13:getWidth(text)+50 or W()*.5, sfont13:getHeight()+10--H()*.05*.7+30
     self.label:setText(text)
     self.label.w = w; self.label.h = h
@@ -504,9 +837,17 @@ function Home:draw()
         
     end
     
+<<<<<<< HEAD
+    if gooi.showingDialog and gooi.panelDialog.big then
+        gooi.drawComponent(gooi.panelDialog, true)
+        love.graphics.draw(game:getAsset("panel.png"))
+        gooi.panelDialog.opaque = nil
+        --gooi.drawComponent(gooi.panelDialog, true)
+=======
     if gooi.showingDialog then
         gooi.drawComponent(gooi.panelDialog, true)
         love.graphics.draw(game:getAsset("panel.png"))
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     end
 end
 
@@ -524,7 +865,13 @@ function game:setup()
     game.data = toybox.getData("loop")
     game.data.unrewardedPoints = game.data.unrewardedPoints or 0
     game.data.convertedPoints = game.data.convertedPoints or 0
+<<<<<<< HEAD
+    game.data.lastDay = game.data.lastDay or os.date("%A, %B, %d, %Y")
+    
+    
+=======
     game.data.lastDay = game.data.lastDay or 0
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 
 --media.setSource("loop/assets")
 media.load(sfx_data)
@@ -573,6 +920,17 @@ media.playMusic("GOAT.ogg")
 
 end
 
+<<<<<<< HEAD
+function game:draw()
+    local s = lg.getFont()
+    lg.setFont(sfont14)
+    local txt = string.format("HIGHSCORE: %s pt", game.data.highest or "??")
+    lg.print(txt, 5, H()-sfont14:getHeight()-5)
+    lg.setFont(s)
+end
+
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 
 
 
@@ -581,6 +939,15 @@ dailyData = {}
 
 function getDailyChallenges(num)
 
+<<<<<<< HEAD
+    if game.data.lastDay ~= os.date("%A, %B, %d, %Y") then
+        game.data.challenges = nil
+        game.data.dailyData = nil
+        game:saveData()
+    end
+    
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
     if game.data.challenges then
         dailyData = game.data.dailyData
         for x, i in pairs(game.data.challenges) do
@@ -610,6 +977,10 @@ function checkDailyChallenge(deck, card)
     if dat and not dat.isCompleted and dat[card.name] then
         dat.done = dat.done + 1
         if dat.done >= dat.amount then
+<<<<<<< HEAD
+            doneChallenge = true
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
             dat.isCompleted = true
         end
         log("\n??????"..card.name) log(dat) log(dat and dat[card.name])

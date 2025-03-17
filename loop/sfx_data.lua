@@ -49,8 +49,20 @@ sfx.other = {
     beg2 = "beg2.mp3",
     
     warhorn = "warhorn.ogg",
+<<<<<<< HEAD
+    
+    cheering = "cheering.mp3",
+    levelup_achievement = "levelup_achievement.mp3",
+    levelup = "levelup.mp3",
+    buzz = "buzz.mp3",
+    ding = "ding.ogg"
 }
 
+
+=======
+}
+
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
 sfx['smc-wwviRetroActionSounds'] = {
     portal1 = "jetwash.ogg",
     portal2 = "gravity_bomb.ogg"

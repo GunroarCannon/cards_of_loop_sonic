@@ -5,6 +5,16 @@ gameoverDeck = {
     eldritch = true,
     cards = {"eldritch"},
     text = {
+<<<<<<< HEAD
+        "You got caught by a monster!!",
+        "An abomination caught you!",
+        "You messed up the time loop!",
+        "The timeloop was broken by you...",
+        "You chose incorrectly...",
+        "You are hunted by spacetime"
+    } or {
+=======
+>>>>>>> bd71ca24efc9f13cccef83ee4d3b7a1f59205e75
         "It's some kind of  monster",
         "An abomination of spacetime",
         "A horror of spacetime approaches you",
