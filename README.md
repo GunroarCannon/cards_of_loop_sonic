@@ -5,4 +5,4 @@ Cards of Loop is a memory card game where you must protect the sacred timeline w
 
 *Server-Side Code:*  
 Find the server-side code here:  
-[Cards of Loop Sonic Server](https://github.com/GunroarCannon/cards_of_loop_sonic_server
+[Cards of Loop Sonic Server](https://github.com/GunroarCannon/cards_of_loop_sonic_server)
